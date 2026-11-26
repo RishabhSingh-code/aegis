@@ -15,7 +15,7 @@ app.use(express.json({ limit: '100kb' }));
 app.use('/api', api);
 app.use(express.static(path.join(__dirname, 'public')));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 mongoose
   .connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/aegis')
@@ -25,8 +25,7 @@ mongoose
       for (let i = 0; i < 10; i++) await createAlert(makeSimAlert(), { silent: true });
     }
     startSimulator();
-    const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0');
+    app.listen(PORT, '0.0.0.0', () => console.log(`Running on ${PORT}`));
   })
   .catch((err) => {
     console.error('Mongo connection failed:', err.message);
