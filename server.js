@@ -25,7 +25,8 @@ mongoose
       for (let i = 0; i < 10; i++) await createAlert(makeSimAlert(), { silent: true });
     }
     startSimulator();
-    app.listen(PORT, () => console.log(`AEGIS running → http://localhost:${PORT}`));
+    const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0');
   })
   .catch((err) => {
     console.error('Mongo connection failed:', err.message);
